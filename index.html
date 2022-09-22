@@ -17,10 +17,7 @@
   }
 
   function playRound(playerSelection, computerSelection) {
-    if (!possibleChoices.includes(playerSelection)){
-      return("Your choice is not valid!");
-    }
-    
+       
     if (computerSelection === playerSelection){
       return "You tie!"
     }
@@ -35,14 +32,55 @@
         "You lose! Scissors beats Paper";
 
       case "scissors":
-      return computerSelection === "rock" ? "You lose! Rock beats Scissors" :
-      "You win! Scissors beats Paper";
+        return computerSelection === "rock" ? "You lose! Rock beats Scissors" :
+        "You win! Scissors beats Paper";
       }
   }
 
-  let playerSelection = prompt("What's your play?").toLowerCase();
-  let computerSelection = getComputerChoice();
-  console.log(`Computer chose ${computerSelection}`);
-  console.log(playRound(playerSelection, computerSelection));
+  function whoWonGame(playerScore, computerScore){
+   if (playerScore > computerScore){
+      return "YOU WON THE GAME!";
+    }
+    if (computerScore > playerScore){
+      return "OH NOOO! YOU LOST...";
+    }
+    if (playerScore === computerScore){
+      return "Well done both, you tied!";
+    }
+  }
+
+  function game(){
+    let playerScore=0;
+    let computerScore=0;
+
+    for (let i = 0; i < 5; i++) {
+      let playerSelection = prompt("What's your play?").toLowerCase();
+      while (!possibleChoices.includes(playerSelection)){
+        playerSelection = prompt("Your choice is not valid! What's your play?")
+          .toLowerCase();
+      }
+      
+      let computerSelection = getComputerChoice();
+
+      let result = playRound(playerSelection, computerSelection);
+      if (result.includes("tie")){
+        playerScore++;
+        computerScore++;
+      }
+      else if (result.includes("win")){
+        playerScore++;
+      }
+      else {
+        computerScore++;
+      }
+
+      console.log(result + `. You: ${playerScore} pts. Computer: ${computerScore} pts.`);
+    }
+    
+    console.log(whoWonGame(playerScore, computerScore));
+  }
+
+  game();
+
 </script>
 </html>
