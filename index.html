@@ -7,9 +7,9 @@
   <title>The Odin Project - Rock, Paper, Scissors</title>
 </head>
 <body>
-  <button>Rock</button>
-  <button>Paper</button>
-  <button>Scissors</button>
+  <button id="rock">Rock</button>
+  <button id="paper">Paper</button>
+  <button id="scissors">Scissors</button>
   
 </body>
 <script>
@@ -20,24 +20,31 @@
   }
 
   function playRound(playerSelection, computerSelection) {
-       
+    
+    let result;
+
     if (computerSelection === playerSelection){
-      return "You tie!"
+      result = "You tie!";
+      return result;
     }
     
     switch (playerSelection){
       case "rock":
-        return computerSelection === "paper" ? "You lose! Paper beats Rock" :
+        result = (computerSelection === "paper") ? "You lose! Paper beats Rock" :
         "You win! Rock beats Scissors";
+        break;
       
       case "paper":
-        return computerSelection === "rock" ? "You win! Paper beats Rock" :
+        result = (computerSelection === "rock") ? "You win! Paper beats Rock" :
         "You lose! Scissors beats Paper";
+        break;
 
       case "scissors":
-        return computerSelection === "rock" ? "You lose! Rock beats Scissors" :
+        result = (computerSelection === "rock")? "You lose! Rock beats Scissors" :
         "You win! Scissors beats Paper";
       }
+
+    return result;
   }
 
   function whoWonGame(playerScore, computerScore){
@@ -52,38 +59,52 @@
     }
   }
 
-  function game(){
+  // function game(){
+  //   let playerScore=0;
+  //   let computerScore=0;
+
+  //   for (let i = 0; i < 1; i++) {
+
+  //     let result = playRound(playerSelection, computerSelection);
+  //     if (result.includes("tie")){
+  //       playerScore++;
+  //       computerScore++;
+  //     }
+  //     else if (result.includes("win")){
+  //       playerScore++;
+  //     }
+  //     else {
+  //       computerScore++;
+  //     }
+
+  //     console.log(result + `. You: ${playerScore} pts. Computer: ${computerScore} pts.`);
+  //   }
+    
+  //   console.log(whoWonGame(playerScore, computerScore));
+  // }
+
+  // game();
+
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach(button => button.addEventListener('click', (e) => {
     let playerScore=0;
     let computerScore=0;
-
-    for (let i = 0; i < 5; i++) {
-      let playerSelection = prompt("What's your play?").toLowerCase();
-      while (!possibleChoices.includes(playerSelection)){
-        playerSelection = prompt("Your choice is not valid! What's your play?")
-          .toLowerCase();
-      }
-      
-      let computerSelection = getComputerChoice();
-
-      let result = playRound(playerSelection, computerSelection);
-      if (result.includes("tie")){
-        playerScore++;
-        computerScore++;
-      }
-      else if (result.includes("win")){
-        playerScore++;
-      }
-      else {
-        computerScore++;
-      }
-
-      console.log(result + `. You: ${playerScore} pts. Computer: ${computerScore} pts.`);
+    let computerSelection = getComputerChoice();
+    let roundResult=playRound(e.target.id, computerSelection);
+    // console.log(roundResult);
+    if (roundResult.includes("tie")){
+      playerScore++;
+      computerScore++;
     }
-    
-    console.log(whoWonGame(playerScore, computerScore));
-  }
+    else if (roundResult.includes("win")){
+      playerScore++;
+    }
+    else {
+      computerScore++;
+    }
 
-  game();
+    console.log(roundResult + `. You: ${playerScore} pts. Computer: ${computerScore} pts.`)
+  }));
 
 </script>
 </html>
