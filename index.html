@@ -10,6 +10,9 @@
   <button id="rock">Rock</button>
   <button id="paper">Paper</button>
   <button id="scissors">Scissors</button>
+
+  <div id="result"></div>
+  <div id="final-result"></div>
   
 </body>
 <script>
@@ -24,7 +27,7 @@
     let result;
 
     if (computerSelection === playerSelection){
-      result = "You tie!";
+      result = "You tie";
       return result;
     }
     
@@ -73,7 +76,9 @@
     else {
       computerScore++;
     }
-    console.log(roundResult + `. You: ${playerScore} pts. Computer: ${computerScore} pts.`);
+    const resultDiv = document.querySelector("#result");
+    resultDiv.innerText = `${roundResult}. You: ${playerScore} pts. Computer: ${computerScore} pts.`;
+
     i++;
     if (i === 5){
       console.log(whoWonGame(playerScore, computerScore));
@@ -88,6 +93,6 @@
   let computerScore=0;
   let i = 0;
   buttons.forEach(button => button.addEventListener('click', game));
-  
+
 </script>
 </html>
