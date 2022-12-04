@@ -51,7 +51,7 @@
   }
 
   function whoWonGame(playerScore, computerScore){
-   if (playerScore > computerScore){
+    if (playerScore > computerScore){
       return "YOU WON THE GAME!";
     }
     if (computerScore > playerScore){
@@ -81,7 +81,8 @@
 
     i++;
     if (i === 5){
-      console.log(whoWonGame(playerScore, computerScore));
+      const finalDiv = document.querySelector("#final-result");
+      finalDiv.innerText = (whoWonGame(playerScore, computerScore));
       playerScore=0;
       computerScore=0;
       i = 0;
