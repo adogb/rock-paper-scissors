@@ -59,39 +59,9 @@
     }
   }
 
-  // function game(){
-  //   let playerScore=0;
-  //   let computerScore=0;
-
-  //   for (let i = 0; i < 1; i++) {
-
-  //     let result = playRound(playerSelection, computerSelection);
-  //     if (result.includes("tie")){
-  //       playerScore++;
-  //       computerScore++;
-  //     }
-  //     else if (result.includes("win")){
-  //       playerScore++;
-  //     }
-  //     else {
-  //       computerScore++;
-  //     }
-
-  //     console.log(result + `. You: ${playerScore} pts. Computer: ${computerScore} pts.`);
-  //   }
-    
-  //   console.log(whoWonGame(playerScore, computerScore));
-  // }
-
-  // game();
-
-  const buttons = document.querySelectorAll("button");
-  let playerScore=0;
-  let computerScore=0;
-  let i = 0;
-  buttons.forEach(button => button.addEventListener('click', (e) => {
+  function game(event){
     let computerSelection = getComputerChoice();
-    let roundResult = playRound(e.target.id, computerSelection);
+    let roundResult = playRound(event.target.id, computerSelection);
     // console.log(roundResult);
     if (roundResult.includes("tie")){
       playerScore++;
@@ -111,8 +81,13 @@
       computerScore=0;
       i = 0;
     }
-  }));
+  }
 
-
+  const buttons = document.querySelectorAll("button");
+  let playerScore=0;
+  let computerScore=0;
+  let i = 0;
+  buttons.forEach(button => button.addEventListener('click', game));
+  
 </script>
 </html>
